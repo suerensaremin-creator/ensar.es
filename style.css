@@ -1,0 +1,358 @@
+/* Tema değişkenleri */
+:root{
+  /* Takım renkleri */
+  --red-500:#ff3b3b;    /* A Takımı */
+  --red-600:#e63232;
+  --blue-500:#2f7cff;   /* B Takımı */
+  --blue-600:#256ee8;
+
+  /* Vurgu ve arka plan */
+  --accent-1:#ff7ab6;
+  --accent-2:#ffd166;
+  --accent-3:#00c853;
+  --bg-1:#fff3fa;
+  --bg-2:#e9f7ff;
+  --bg-3:#f5f9ff;
+
+  /* Metin ve gölge */
+  --text-900:#1c1e21;
+  --text-700:#3a3f44;
+  --text-500:#5a6670;
+
+  /* Gölgelendirme */
+  --shadow-lg:0 20px 40px rgba(0,0,0,0.18);
+  --shadow-md:0 12px 24px rgba(0,0,0,0.14);
+  --shadow-sm:0 8px 16px rgba(0,0,0,0.10);
+
+  /* Kart ve kutu */
+  --card-bg:#ffffff;
+  --card-ring:#e3e8ff;
+}
+
+/* Genel */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:"Segoe UI", Roboto, Arial, sans-serif;
+  color:var(--text-900);
+  /* Renkli degrade arka plan */
+  background:
+    radial-gradient(1200px 600px at 15% 10%, rgba(255,122,182,0.35), transparent 60%),
+    radial-gradient(900px 500px at 85% 20%, rgba(47,124,255,0.30), transparent 60%),
+    radial-gradient(600px 400px at 50% 90%, rgba(255,209,102,0.30), transparent 55%),
+    linear-gradient(135deg, var(--bg-1), var(--bg-2));
+}
+
+/* Başlık tam ortayı kaplar ve yapışkan kontroller */
+#header{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:180px;
+  text-align:center;
+  padding:24px 16px;
+}
+#gameTitle{
+  font-size:58px;
+  font-weight:900;
+  letter-spacing:1.5px;
+  margin:0 0 14px 0;
+  color:var(--accent-1);
+  text-shadow:
+    2px 2px 0 #fff,
+    10px 10px 0 rgba(255,122,182,0.25);
+  filter: drop-shadow(0 10px 14px rgba(255,122,182,0.25));
+}
+#headerControls{
+  position:sticky; /* ekran üstünde hep görünür */
+  top:10px;
+  z-index:50;
+  display:flex;
+  gap:12px;
+}
+
+/* Butonlar */
+button{
+  border:none;
+  border-radius:14px;
+  padding:12px 18px;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:var(--shadow-sm);
+  transition:transform .08s ease, box-shadow .2s ease, opacity .2s ease;
+}
+button:hover{ transform:translateY(-2px); box-shadow:var(--shadow-md); }
+button.primary{ background:var(--accent-3); color:#fff; }
+button.accent{ background:var(--accent-2); color:#3a2a00; }
+button.danger{ background:#ff5252; color:#fff; }
+button[disabled]{ opacity:.6; cursor:not-allowed; }
+
+/* 30 sn sayaç sol üst */
+#roundTimer{
+  position:fixed;
+  top:12px; left:12px;
+  background:var(--card-bg);
+  border-radius:14px;
+  padding:10px 14px;
+  box-shadow:var(--shadow-md);
+  border:2px solid var(--card-ring);
+  display:flex; align-items:center; gap:8px;
+  z-index:60;
+}
+#roundTimer .timerIcon{ font-size:20px; }
+#roundTime{
+  font-size:22px; font-weight:900; color:var(--text-900);
+}
+
+/* Oyun alanı */
+#gameArea{
+  max-width:1200px;
+  margin:24px auto 36px;
+  padding:0 16px;
+}
+
+/* Soru alanı */
+#questionArea{
+  background:var(--card-bg);
+  border-radius:18px;
+  padding:18px;
+  box-shadow:var(--shadow-lg);
+  border:2px solid var(--card-ring);
+  margin-bottom:18px;
+  backdrop-filter:saturate(1.2) blur(2px);
+}
+#questionText{
+  font-size:26px;
+  font-weight:800;
+  margin-bottom:12px;
+  color:var(--text-900);
+}
+#questionImage{
+  width:100%;
+  max-height:280px;
+  object-fit:contain;
+  border-radius:14px;
+  box-shadow:var(--shadow-sm);
+  border:2px dashed #e8eefc;
+}
+
+/* Şıklar iki sütun */
+#optionsArea{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+/* Sütun kartları */
+.sideColumn{
+  background:var(--card-bg);
+  border-radius:18px;
+  padding:16px;
+  box-shadow:var(--shadow-lg);
+  border:2px solid var(--card-ring);
+  position:relative;
+  overflow:hidden;
+}
+.sideColumn.left{
+  border-top:8px solid var(--red-500);
+  box-shadow: 0 8px 16px rgba(255,59,59,0.15), var(--shadow-md);
+}
+.sideColumn.right{
+  border-top:8px solid var(--blue-500);
+  box-shadow: 0 8px 16px rgba(47,124,255,0.15), var(--shadow-md);
+}
+
+/* Sütun başlığı */
+.sideHeader{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.teamName{
+  margin:0;
+  font-size:22px;
+  font-weight:900;
+  letter-spacing:.5px;
+}
+.scoreBox{
+  margin-left:auto;
+  background:linear-gradient(135deg,#f0f5ff,#ffffff);
+  border-radius:12px;
+  padding:8px 12px;
+  font-weight:900;
+  color:var(--text-900);
+  box-shadow:var(--shadow-sm);
+  border:2px solid var(--card-ring);
+}
+
+/* Ceza kutusu */
+.penaltyBox{
+  position:absolute;
+  top:12px; right:12px;
+  background:#ffebee;
+  color:#b71c1c;
+  border-radius:12px;
+  padding:6px 10px;
+  font-weight:900;
+  box-shadow:var(--shadow-sm);
+  border:2px solid #ffcdd2;
+}
+
+/* Doğru işareti */
+.rightWrong{
+  position:absolute;
+  bottom:12px; left:12px;
+  font-weight:900;
+  font-size:18px;
+  opacity:0;
+  color:#2e7d32;
+  background:#e8f5e9;
+  border:2px solid #c8e6c9;
+  border-radius:10px;
+  padding:6px 10px;
+  box-shadow:var(--shadow-sm);
+  transition:opacity .2s ease, transform .2s ease;
+}
+.rightWrong.show{ opacity:1; transform:translateY(-2px); }
+
+/* Şıklar grid */
+.optionsGrid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+  margin-top:14px;
+}
+
+/* Şık butonu */
+.optionBtn{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background:linear-gradient(180deg,#ffffff,#f9fbff);
+  border:2px solid var(--card-ring);
+  border-radius:14px;
+  padding:12px;
+  box-shadow:var(--shadow-sm);
+  transition:transform .08s ease, box-shadow .2s ease, opacity .2s ease, border-color .2s ease;
+}
+.optionBtn:hover{
+  transform:translateY(-2px);
+  box-shadow:var(--shadow-md);
+  border-color:#d6dcff;
+}
+
+/* Şık rozetleri takım renklerine göre */
+.sideColumn.left .badge{ background:var(--red-500); }
+.sideColumn.right .badge{ background:var(--blue-500); }
+
+.optionBtn .badge{
+  display:inline-block;
+  min-width:36px;
+  text-align:center;
+  font-weight:900;
+  color:#fff;
+  border-radius:10px;
+  padding:6px 8px;
+  box-shadow:inset 0 -2px 0 rgba(0,0,0,0.15);
+}
+
+/* Şık içeriği */
+.optionBtn .content{
+  flex:1;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.optionBtn .content img{
+  width:54px; height:54px; object-fit:cover; border-radius:10px; box-shadow:var(--shadow-sm);
+  border:2px solid #eef2ff;
+}
+.optionBtn .content .text{
+  flex:1;
+  font-size:18px; font-weight:800; color:var(--text-900);
+}
+
+/* Durum sınıfları */
+.optionBtn.disabled{ pointer-events:none; opacity:.55; }
+.optionBtn.faded{ opacity:.35; border-color:#ddd; }
+
+/* Oyun sonu overlay ve kart */
+.overlay{
+  position:fixed; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(0,0,0,.38);
+  z-index:80;
+}
+.card{
+  background:var(--card-bg);
+  border-radius:20px;
+  box-shadow:var(--shadow-lg);
+  border:2px solid var(--card-ring);
+}
+.endCard{ width:min(540px, 94vw); padding:24px; text-align:center; }
+.endTitle{
+  font-size:52px; font-weight:900; color:var(--accent-1); margin-bottom:8px;
+  text-shadow: 2px 2px 0 #fff, 10px 10px 0 rgba(255,122,182,0.25);
+}
+.endSub{ font-size:22px; font-weight:800; margin-bottom:16px; }
+
+/* Soru yönetimi modal */
+.qmCard{ width:min(1120px, 95vw); padding:18px; }
+.qmHeader{
+  display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;
+}
+.qmBody{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.box{
+  background:linear-gradient(180deg,#ffffff,#fbfdff);
+  border-radius:16px;
+  padding:12px;
+  box-shadow:var(--shadow-sm);
+  border:2px solid var(--card-ring);
+}
+.listHeader{
+  display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;
+}
+.listActions{ display:flex; gap:8px; align-items:center; }
+.importLabel{ display:flex; gap:6px; align-items:center; }
+#importFile{ display:inline-block; }
+
+#questionList{ list-style:none; padding:0; margin:0; }
+#questionList li{
+  border:2px solid #e6ecff; border-radius:12px; padding:10px; margin-bottom:8px;
+  display:flex; align-items:center; gap:8px; justify-content:space-between;
+}
+#questionList li .meta{ font-size:14px; color:var(--text-500); }
+
+.qmForm label, .optRow{ display:block; margin:8px 0; }
+.optRow{
+  display:grid; grid-template-columns: 36px 1fr 1fr;
+  gap:8px; align-items:center;
+}
+.optBadge{
+  display:inline-block; text-align:center; font-weight:900; color:#fff;
+  background:#8890ff; border-radius:10px; padding:6px 8px;
+}
+
+.qmActions{ display:flex; gap:8px; margin-top:12px; }
+
+/* Gizleme */
+.hidden{ display:none; }
+
+/* Konfeti canvas üstte */
+#confettiCanvas{
+  position:fixed; inset:0;
+  pointer-events:none;
+  z-index:90;
+}
+
+/* Mobil uyum */
+@media (max-width: 860px){
+  #optionsArea{ grid-template-columns:1fr; }
+  .sideHeader{ flex-wrap:wrap; }
+  #questionImage{ max-height:220px; }
+  #gameTitle{ font-size:44px; }
+}
