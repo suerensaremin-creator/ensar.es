@@ -7,147 +7,138 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Başlık ve kontrol butonları -->
-  <header id="header">
-    <h1 id="gameTitle">Kureyş Suresinin İzinde</h1>
-    <div id="headerControls">
-      <button id="startBtn" class="primary">BAŞLAT</button>
-      <button id="questionManagerBtn" class="accent">Soru Yönetimi</button>
-    </div>
-  </header>
 
-  <!-- 30 saniye sayaç -->
-  <div id="roundTimer" class="hidden">
-    <span class="timerIcon">⏱️</span>
-    <span id="roundTime">30</span>
+<header id="header">
+  <h1 id="gameTitle">Kureyş Suresinin İzinde</h1>
+  <div id="headerControls">
+    <button id="startBtn" class="primary">BAŞLAT</button>
+    <button id="questionManagerBtn" class="accent">Soru Yönetimi</button>
   </div>
+</header>
 
-  <!-- Oyun alanı -->
-  <main id="gameArea" class="hidden">
-    <section id="questionArea">
-      <div id="questionText">Soru buraya gelecek</div>
-      <img id="questionImage" alt="" class="hidden" />
-    </section>
+<div id="roundTimer" class="hidden">
+  <span class="timerIcon">⏱️</span>
+  <span id="roundTime">30</span>
+</div>
 
-    <section id="optionsArea">
-      <div class="sideColumn left">
-        <div class="sideHeader">
-          <h2 class="teamName">A Takımı</h2>
-          <div class="scoreBox" id="leftScore">0</div>
-          <div class="penaltyBox hidden" id="leftPenalty">3</div>
-        </div>
-        <div class="rightWrong" id="leftRightWrong"></div>
-        <div class="optionsGrid" id="leftOptions"></div>
+<main id="gameArea" class="hidden">
+  <section id="questionArea">
+    <div id="questionText">Soru buraya gelecek</div>
+    <img id="questionImage" alt="" class="hidden" />
+  </section>
+
+  <section id="optionsArea">
+    <div class="sideColumn left">
+      <div class="sideHeader">
+        <h2 class="teamName">A Takımı</h2>
+        <div class="scoreBox" id="leftScore">0</div>
+        <div class="penaltyBox hidden" id="leftPenalty">3</div>
       </div>
-
-      <div class="sideColumn right">
-        <div class="sideHeader">
-          <h2 class="teamName">B Takımı</h2>
-          <div class="scoreBox" id="rightScore">0</div>
-          <div class="penaltyBox hidden" id="rightPenalty">3</div>
-        </div>
-        <div class="rightWrong" id="rightRightWrong"></div>
-        <div class="optionsGrid" id="rightOptions"></div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Oyun sonu overlay -->
-  <div id="endOverlay" class="overlay hidden">
-    <div class="endCard card">
-      <div class="endTitle">MAŞALLAH</div>
-      <div class="endSub" id="endResult"></div>
-      <button id="restartBtn" class="primary">Yeniden Oyna</button>
+      <div class="rightWrong" id="leftRightWrong"></div>
+      <div class="optionsGrid" id="leftOptions"></div>
     </div>
-  </div>
 
-  <!-- Soru yönetimi modal -->
-  <div id="qmOverlay" class="overlay hidden" aria-modal="true" role="dialog">
-    <div class="qmCard card">
-      <div class="qmHeader">
-        <h3>Soru Yönetimi</h3>
-        <button id="closeQm" class="danger">Kapat</button>
+    <div class="sideColumn right">
+      <div class="sideHeader">
+        <h2 class="teamName">B Takımı</h2>
+        <div class="scoreBox" id="rightScore">0</div>
+        <div class="penaltyBox hidden" id="rightPenalty">3</div>
       </div>
+      <div class="rightWrong" id="rightRightWrong"></div>
+      <div class="optionsGrid" id="rightOptions"></div>
+    </div>
+  </section>
+</main>
 
-      <div class="qmBody">
-        <div class="qmList box">
-          <div class="listHeader">
-            <h4>Mevcut Sorular</h4>
-            <div class="listActions">
-              <button id="exportBtn" class="accent">Dışa Aktar</button>
-              <label class="importLabel">
-                İçe Aktar
-                <input type="file" id="importFile" accept="application/json" />
-              </label>
-            </div>
+<div id="endOverlay" class="overlay hidden">
+  <div class="endCard card">
+    <div class="endTitle">MAŞALLAH</div>
+    <div class="endSub" id="endResult"></div>
+    <button id="restartBtn" class="primary">Yeniden Oyna</button>
+  </div>
+</div>
+
+<div id="qmOverlay" class="overlay hidden" aria-modal="true" role="dialog">
+  <div class="qmCard card">
+    <div class="qmHeader">
+      <h3>Soru Yönetimi</h3>
+      <button id="closeQm" class="danger">Kapat</button>
+    </div>
+
+    <div class="qmBody">
+      <div class="qmList box">
+        <div class="listHeader">
+          <h4>Mevcut Sorular</h4>
+          <div class="listActions">
+            <button id="exportBtn" class="accent">Dışa Aktar</button>
+            <label class="importLabel">
+              İçe Aktar
+              <input type="file" id="importFile" accept="application/json" />
+            </label>
           </div>
-          <ul id="questionList"></ul>
         </div>
+        <ul id="questionList"></ul>
+      </div>
 
-        <div class="qmForm box">
-          <h4>Soru Ekle/Düzenle</h4>
-          <form id="qmForm">
-            <label>Başlık/Soru Kökü
-              <textarea id="qText" rows="2" required placeholder="Soru metni..."></textarea>
-            </label>
+      <div class="qmForm box">
+        <h4>Soru Ekle/Düzenle</h4>
+        <form id="qmForm">
+          <label>Başlık/Soru Kökü
+            <textarea id="qText" rows="2" required placeholder="Soru metni..."></textarea>
+          </label>
 
-            <label>Soru görseli (isteğe bağlı)
-              <input id="qImageFile" type="file" accept="image/*" />
-              <img id="qImagePreview" style="display:none; max-width:200px; margin-top:8px;" alt="Soru önizleme">
-            </label>
+          <label>Soru görsel (isteğe bağlı)
+            <input id="qImageFile" type="file" accept="image/*" />
+            <img id="qImagePreview" style="display:none; max-width:200px; margin-top:8px;" alt="Soru önizleme">
+          </label>
 
-            <fieldset>
-              <legend>Şıklar (A–D) ve görselleri</legend>
-              <div class="optRow">
-                <span class="optBadge">A</span>
-                <input id="optA" type="text" required placeholder="A şık metni" />
-                <input id="optAImgFile" type="file" accept="image/*" />
-                <img id="optAImgPreview" style="display:none; max-width:100px;" alt="A görsel önizleme">
-              </div>
-              <div class="optRow">
-                <span class="optBadge">B</span>
-                <input id="optB" type="text" required placeholder="B şık metni" />
-                <input id="optBImgFile" type="file" accept="image/*" />
-                <img id="optBImgPreview" style="display:none; max-width:100px;" alt="B görsel önizleme">
-              </div>
-              <div class="optRow">
-                <span class="optBadge">C</span>
-                <input id="optC" type="text" required placeholder="C şık metni" />
-                <input id="optCImgFile" type="file" accept="image/*" />
-                <img id="optCImgPreview" style="display:none; max-width:100px;" alt="C görsel önizleme">
-              </div>
-              <div class="optRow">
-                <span class="optBadge">D</span>
-                <input id="optD" type="text" required placeholder="D şık metni" />
-                <input id="optDImgFile" type="file" accept="image/*" />
-                <img id="optDImgPreview" style="display:none; max-width:100px;" alt="D görsel önizleme">
-              </div>
-            </fieldset>
-
-            <label>Doğru şık
-              <select id="correctIndex">
-                <option value="0">A</option>
-                <option value="1">B</option>
-                <option value="2">C</option>
-                <option value="3">D</option>
-              </select>
-            </label>
-
-            <div class="qmActions">
-              <button type="submit" id="saveQuestion" class="primary">Kaydet</button>
-              <button type="button" id="newQuestion" class="accent">Yeni</button>
-              <button type="button" id="deleteQuestion" class="danger">Seçiliyi Sil</button>
+          <fieldset>
+            <legend>Şıklar (A–D) ve görselleri</legend>
+            <div class="optRow">
+              <span class="optBadge">A</span>
+              <input id="optA" type="text" required placeholder="A şık metni" />
+              <input id="optAImgFile" type="file" accept="image/*" />
             </div>
+            <div class="optRow">
+              <span class="optBadge">B</span>
+              <input id="optB" type="text" required placeholder="B şık metni" />
+              <input id="optBImgFile" type="file" accept="image/*" />
+            </div>
+            <div class="optRow">
+              <span class="optBadge">C</span>
+              <input id="optC" type="text" required placeholder="C şık metni" />
+              <input id="optCImgFile" type="file" accept="image/*" />
+            </div>
+            <div class="optRow">
+              <span class="optBadge">D</span>
+              <input id="optD" type="text" required placeholder="D şık metni" />
+              <input id="optDImgFile" type="file" accept="image/*" />
+            </div>
+          </fieldset>
 
-            <input type="hidden" id="editingIndex" value="-1" />
-          </form>
-        </div>
+          <label>Doğru şık
+            <select id="correctIndex">
+              <option value="0">A</option>
+              <option value="1">B</option>
+              <option value="2">C</option>
+              <option value="3">D</option>
+            </select>
+          </label>
+
+          <div class="qmActions">
+            <button type="submit" id="saveQuestion" class="primary">Kaydet</button>
+            <button type="button" id="newQuestion" class="accent">Yeni</button>
+            <button type="button" id="deleteQuestion" class="danger">Seçiliyi Sil</button>
+          </div>
+
+          <input type="hidden" id="editingIndex" value="-1" />
+        </form>
       </div>
     </div>
   </div>
+</div>
 
-  <canvas id="confettiCanvas" class="hidden"></canvas>
-
-  <script src="script.js"></script>
+<canvas id="confettiCanvas" class="hidden"></canvas>
+<script src="script.js"></script>
 </body>
 </html>
