@@ -93,9 +93,11 @@
               <textarea id="qText" rows="2" required placeholder="Soru metni..."></textarea>
             </label>
 
-            <label>Soru görsel URL (opsiyonel)
-              <input id="qImage" type="url" placeholder="https://..." />
-            </label>
+           <label>Soru görsel (isteğe bağlı)
+  <input id="qImageFile" type="file" accept="image/*" />
+  <img id="qImagePreview" style="display:none; max-width:200px; margin-top:8px;" alt="Soru önizleme">
+</label>
+
 
             <fieldset>
               <legend>Şıklar (A–D) ve görselleri</legend>
@@ -149,4 +151,5 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
