@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Üst başlık ve sürekli görünür kontrol butonları -->
+  <!-- Başlık ve kontrol butonları -->
   <header id="header">
     <h1 id="gameTitle">Kureyş Suresinin İzinde</h1>
     <div id="headerControls">
@@ -16,7 +16,7 @@
     </div>
   </header>
 
-  <!-- Sol üst 30 sn sayaç -->
+  <!-- 30 saniye sayaç -->
   <div id="roundTimer" class="hidden">
     <span class="timerIcon">⏱️</span>
     <span id="roundTime">30</span>
@@ -24,13 +24,11 @@
 
   <!-- Oyun alanı -->
   <main id="gameArea" class="hidden">
-    <!-- Soru kökü ve görsel -->
     <section id="questionArea">
       <div id="questionText">Soru buraya gelecek</div>
       <img id="questionImage" alt="" class="hidden" />
     </section>
 
-    <!-- Şıklar: sol ve sağ sütun, aynı seçenekler -->
     <section id="optionsArea">
       <div class="sideColumn left">
         <div class="sideHeader">
@@ -54,7 +52,7 @@
     </section>
   </main>
 
-  <!-- Oyun sonu ekranı -->
+  <!-- Oyun sonu overlay -->
   <div id="endOverlay" class="overlay hidden">
     <div class="endCard card">
       <div class="endTitle">MAŞALLAH</div>
@@ -63,7 +61,7 @@
     </div>
   </div>
 
-  <!-- Soru yönetimi paneli (modal) -->
+  <!-- Soru yönetimi modal -->
   <div id="qmOverlay" class="overlay hidden" aria-modal="true" role="dialog">
     <div class="qmCard card">
       <div class="qmHeader">
@@ -93,33 +91,36 @@
               <textarea id="qText" rows="2" required placeholder="Soru metni..."></textarea>
             </label>
 
-           <label>Soru görsel (isteğe bağlı)
-  <input id="qImageFile" type="file" accept="image/*" />
-  <img id="qImagePreview" style="display:none; max-width:200px; margin-top:8px;" alt="Soru önizleme">
-</label>
-
+            <label>Soru görseli (isteğe bağlı)
+              <input id="qImageFile" type="file" accept="image/*" />
+              <img id="qImagePreview" style="display:none; max-width:200px; margin-top:8px;" alt="Soru önizleme">
+            </label>
 
             <fieldset>
               <legend>Şıklar (A–D) ve görselleri</legend>
               <div class="optRow">
                 <span class="optBadge">A</span>
                 <input id="optA" type="text" required placeholder="A şık metni" />
-                <input id="optAImg" type="url" placeholder="A görsel URL (opsiyonel)" />
+                <input id="optAImgFile" type="file" accept="image/*" />
+                <img id="optAImgPreview" style="display:none; max-width:100px;" alt="A görsel önizleme">
               </div>
               <div class="optRow">
                 <span class="optBadge">B</span>
                 <input id="optB" type="text" required placeholder="B şık metni" />
-                <input id="optBImg" type="url" placeholder="B görsel URL (opsiyonel)" />
+                <input id="optBImgFile" type="file" accept="image/*" />
+                <img id="optBImgPreview" style="display:none; max-width:100px;" alt="B görsel önizleme">
               </div>
               <div class="optRow">
                 <span class="optBadge">C</span>
                 <input id="optC" type="text" required placeholder="C şık metni" />
-                <input id="optCImg" type="url" placeholder="C görsel URL (opsiyonel)" />
+                <input id="optCImgFile" type="file" accept="image/*" />
+                <img id="optCImgPreview" style="display:none; max-width:100px;" alt="C görsel önizleme">
               </div>
               <div class="optRow">
                 <span class="optBadge">D</span>
                 <input id="optD" type="text" required placeholder="D şık metni" />
-                <input id="optDImg" type="url" placeholder="D görsel URL (opsiyonel)" />
+                <input id="optDImgFile" type="file" accept="image/*" />
+                <img id="optDImgPreview" style="display:none; max-width:100px;" alt="D görsel önizleme">
               </div>
             </fieldset>
 
@@ -145,11 +146,8 @@
     </div>
   </div>
 
-  <!-- Konfeti için canvas -->
   <canvas id="confettiCanvas" class="hidden"></canvas>
 
   <script src="script.js"></script>
 </body>
 </html>
-
-
